@@ -1,4 +1,4 @@
-name: Deploy Static Website
+name: Deploy Static Website to Nginx
 
 on:
   push:
@@ -12,14 +12,14 @@ jobs:
 
     steps:
 
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Deploy Website
         run: |
           sudo cp index.html /var/www/html/index.html
-          sudo systemctl restart apache2
+          sudo systemctl restart nginx
 
-      - name: Check Apache
+      - name: Check Nginx
         run: |
-          sudo systemctl status apache2 --no-pager
+          sudo systemctl status nginx --no-pager
